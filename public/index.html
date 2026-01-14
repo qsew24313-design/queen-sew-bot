@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QUEEN SEW | Pair</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  font-family:sans-serif;
+  color:white;
+}
+.box{
+  background:rgba(0,0,0,0.6);
+  padding:30px;
+  border-radius:15px;
+  width:320px;
+  text-align:center;
+}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+}
+button{
+  background:#ff4ecd;
+  color:white;
+  font-weight:bold;
+}
+#code{
+  margin-top:15px;
+  color:#00ffcc;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+  <h2>👑 QUEEN SEW</h2>
+  <p>WhatsApp Pair</p>
+  <input id="num" placeholder="947XXXXXXXX">
+  <button onclick="pair()">Get Pair Code</button>
+  <div id="code"></div>
+</div>
+
+<script>
+async function pair(){
+  const number = document.getElementById("num").value;
+  const res = await fetch("/pair",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({number})
+  });
+  const data = await res.json();
+  document.getElementById("code").innerText = data.code || "Error";
+}
+</script>
+</body>
+</html>
